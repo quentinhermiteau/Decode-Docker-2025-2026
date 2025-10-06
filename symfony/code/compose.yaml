@@ -30,6 +30,13 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data:rw
 
+  adminer:
+    image: adminer:5.4.0
+    ports:
+      - 8081:8080
+    depends_on:
+      - database
+
   mailer:
     image: axllent/mailpit
     ports:
