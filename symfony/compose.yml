@@ -1,0 +1,8 @@
+services:
+  symfony:
+    build:
+      context: .
+    ports:
+      - 8080:80
+    volumes:
+      - ./code:/app/project
