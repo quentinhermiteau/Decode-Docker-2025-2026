@@ -1,9 +1,0 @@
-services:
-  symfony:
-    build:
-      context: .
-    command: symfony serve:start --dir=/app/project --allow-all-ip
-    ports:
-      - 8080:8000
-    volumes:
-      - ./code:/app/project
