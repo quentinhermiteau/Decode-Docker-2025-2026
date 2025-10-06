@@ -1,0 +1,3 @@
+CREATE TABLE test (test INTEGER);
+
+INSERT INTO test VALUES (1);

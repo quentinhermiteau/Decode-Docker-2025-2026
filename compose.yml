@@ -1,0 +1,38 @@
+services:
+  php-apache:
+    # image: php:8.4.13-apache
+    build:
+      context: .
+      dockerfile: ./php/php.Dockerfile
+      # équivalent: docker build -t my-php-apache -f ./php/php.Dockerfile .
+    ports:
+      - 8080:80 # équivalent du -p 8080:80 avec docker
+    volumes:
+      - ./code:/var/www/html
+
+  ssh:
+    build:
+      context: ./ssh
+    ports:
+      - 1222:22
+
+  db:
+    image: postgres:14.19-alpine3.21
+    container_name: toto
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./db-init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_USER=toto
+      - POSTGRES_PASSWORD=toto
+      - POSTGRES_DB=app
+
+  adminer:
+    image: adminer:5.4.0
+    ports:
+      - 8081:8080
+    depends_on:
+      - mariadb
+
+volumes:
+  database:

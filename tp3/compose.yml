@@ -1,0 +1,25 @@
+services:
+  php:
+    # image: php:8.4.13-apache
+    build:
+      context: .
+    ports:
+      - 8080:80
+    volumes:
+      - ./code:/var/www/html
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  postgres:
+    image: postgres:18.0
+    volumes:
+      - database:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+volumes:
+  database:
